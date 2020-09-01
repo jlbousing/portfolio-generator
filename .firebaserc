@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "covidworkers-f0bb1": {
+      "hosting": {
+        "portfolio-generator": [
+          "covidworkers-f0bb1"
+        ]
+      }
+    }
+  }
+}
