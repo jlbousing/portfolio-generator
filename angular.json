@@ -131,5 +131,8 @@
       }
     }
   },
-  "defaultProject": "portfolio-generator"
+  "defaultProject": "portfolio-generator",
+  "cli": {
+    "analytics": false
+  }
 }

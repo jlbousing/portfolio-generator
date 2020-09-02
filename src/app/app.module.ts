@@ -8,19 +8,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { Routes, RouterModule} from '@angular/router';
+import { MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { LoginComponent } from './pages/login/login.component';
-import { Routes, RouterModule} from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
+import { LoginModuleModule} from './pages/login/login-module.module';
 
 const routes: Routes = [
-  {path: "**", component: NotFoundComponent},
   {path: "", component: HomeComponent},
-  {path: "login", component: LoginComponent}
+  {path: "**", component: NotFoundComponent}
 ];
 
 @NgModule({
@@ -28,16 +27,17 @@ const routes: Routes = [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent,
+    //LoginComponent,
     HomeComponent,
     NotFoundComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
     BrowserModule,
+    RouterModule.forRoot(routes),
     AppRoutingModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    LoginModuleModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule
