@@ -6,19 +6,19 @@
       <mat-card-title>Log in</mat-card-title>
     </mat-card-header>
 
-    <form class="example-form">
+    <form class="example-form" (ngSubmit)="loginEmailPass()">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Username">
+          <input matInput placeholder="Username" [(ngModel)]="email" name="email">
         </mat-form-field>
       </mat-card-content>
 
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password">
+          <input matInput placeholder="Password" type="password" [(ngModel)]="password" name="password">
         </mat-form-field>
       </mat-card-content>
-      <button mat-stroked-button color="accent" class="btn-block">Log in</button>
+      <button mat-stroked-button color="accent" class="btn-block" (click)="loginEmailPass()">Log in</button>
     </form>
   </mat-card>
 
