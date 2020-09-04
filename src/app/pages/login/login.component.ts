@@ -9,11 +9,10 @@ import { ReactiveFormsModule} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  private email: string;
-  private password: string;
+   email: string;
+   password: string;
 
   constructor(private loginService: LoginServiceService) {
-    console.log("hello uya");
   }
 
   ngOnInit(): void {
@@ -28,6 +27,10 @@ export class LoginComponent implements OnInit {
     }else{
       console.log("Credenciales invalidas");
     }
+  }
+
+  loginGoogle(){
+    this.loginService.loginGoogle();
   }
 
 }
