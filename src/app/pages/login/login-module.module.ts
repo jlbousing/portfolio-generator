@@ -11,7 +11,10 @@ import { MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { LoginComponent} from './login.component';
-
+import { AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import { LoginServiceService} from './login-service.service';
+import { environment} from '../../../environments/environment';
 
 const routes: Routes = [
   {path: "login", component: LoginComponent}
@@ -31,7 +34,12 @@ const routes: Routes = [
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
+  ],
+  providers: [
+    LoginServiceService
   ]
 })
-export class LoginModuleModule { }
+export class LoginModule { }

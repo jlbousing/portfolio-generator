@@ -15,7 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
-import { LoginModuleModule} from './pages/login/login-module.module';
+import { LoginModule} from './pages/login/login-module.module';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -37,7 +37,7 @@ const routes: Routes = [
     AppRoutingModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    LoginModuleModule,
+    LoginModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule

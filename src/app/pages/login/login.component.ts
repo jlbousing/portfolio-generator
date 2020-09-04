@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginServiceService} from './login-service.service';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {
+  private email: string;
+  private password: string;
+
+  constructor(private loginService: LoginServiceService) {
     console.log("hello uya");
   }
 
   ngOnInit(): void {
 
+  }
+
+  loginEmailPass(){
+
+    if(this.loginService.validateCredential(this.email)
+      && this.loginService.validateCredential(this.password)){
+        this.loginService.login(this.email, this.password);
+    }else{
+      console.log("Credenciales invalidas");
+    }
   }
 
 }
