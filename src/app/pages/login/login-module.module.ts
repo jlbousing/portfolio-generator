@@ -10,19 +10,23 @@ import { MatInputModule} from '@angular/material/input';
 import { MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import { MatGridListModule} from '@angular/material/grid-list';
 import { LoginComponent} from './login.component';
+import { RegisterComponent} from '../register/register.component';
 import { AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import { LoginServiceService} from './login-service.service';
 import { environment} from '../../../environments/environment';
 
 const routes: Routes = [
-  {path: "login", component: LoginComponent}
+  {path: "login", component: LoginComponent},
+  {path: "register", component: RegisterComponent}
 ];
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,8 @@ const routes: Routes = [
     MatIconModule,
     RouterModule.forRoot(routes),
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    MatGridListModule
   ],
   providers: [
     LoginServiceService

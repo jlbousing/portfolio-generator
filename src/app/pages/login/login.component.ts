@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginServiceService} from './login-service.service';
 import { ReactiveFormsModule} from '@angular/forms';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
    email: string;
    password: string;
 
-  constructor(private loginService: LoginServiceService) {
+  constructor(private loginService: LoginServiceService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,6 +33,10 @@ export class LoginComponent implements OnInit {
 
   loginGoogle(){
     this.loginService.loginGoogle();
+  }
+
+  register(){
+    this.router.navigate(["/register"]);
   }
 
 }

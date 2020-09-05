@@ -37,6 +37,7 @@ export class LoginServiceService {
       .createUserWithEmailAndPassword(email,password)
       .then((response) => {
         console.log("usuario creado ",response);
+        localStorage.setItem("userInfo",JSON.stringify(this.saveUserInfo(response.user)));
       }).catch((err) => {
        console.log("something is wrong ",err);
     });
