@@ -24,9 +24,15 @@
     </button>
     <span>WorkExp</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
+
+    <button mat-button [matMenuTriggerFor]="aboveMenu" *ngIf="isLoged">
+      {{ nameUser !== null ? nameUser : 'WorkExp user'}}
     </button>
+    <mat-menu #aboveMenu="matMenu" yPosition="above">
+      <button mat-menu-item>Show your WorkExp</button>
+      <button mat-menu-item (click)="logOut()">Log out</button>
+    </mat-menu>
+
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>share</mat-icon>
     </button>

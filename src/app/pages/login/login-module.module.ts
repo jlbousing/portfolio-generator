@@ -17,10 +17,12 @@ import { AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import { LoginServiceService} from './login-service.service';
 import { environment} from '../../../environments/environment';
+import { HomeComponent} from '../home/home.component';
 
 const routes: Routes = [
   {path: "login", component: LoginComponent},
-  {path: "register", component: RegisterComponent}
+  {path: "register", component: RegisterComponent},
+  {path: "home", component: HomeComponent}
 ];
 
 @NgModule({

@@ -6,7 +6,7 @@
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
 
-    <form class="example-form" (ngSubmit)="loginEmailPass()">
+    <form class="example-form" (ngSubmit)="register()">
       <mat-card-content>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="email" [(ngModel)]="email" name="email">
@@ -28,7 +28,7 @@
       <button mat-stroked-button color="accent" class="btn-block login-button" (click)="login()">Login</button>
     </form>
     <br>
-    <button mat-stroked-button color="warn" class="btn-block" (click)="loginGoogle()">Access with Google</button>
+    <button mat-stroked-button color="warn" class="btn-block" (click)="loginGoolge()">Access with Google</button>
   </mat-card>
 
 </div>

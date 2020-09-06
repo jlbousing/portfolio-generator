@@ -12,10 +12,12 @@ import { Routes, RouterModule} from '@angular/router';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 import { LoginModule} from './pages/login/login-module.module';
+import { HomeModule} from './pages/home/home.module';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -27,8 +29,6 @@ const routes: Routes = [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    //LoginComponent,
-    HomeComponent,
     NotFoundComponent
   ],
   imports: [
@@ -40,7 +40,9 @@ const routes: Routes = [
     LoginModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
