@@ -8,7 +8,7 @@ import { User} from '../../shared/models/user';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginServiceService {
+export class LoginServiceService  {
 
   private userData: Observable<firebase.User>;
 

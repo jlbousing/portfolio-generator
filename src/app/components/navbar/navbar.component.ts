@@ -22,10 +22,12 @@ export class NavbarComponent implements OnInit {
 
   isLogged(){
 
-    if(localStorage.getItem("userInfo") && this.isLoged){
+    if(localStorage.getItem("userInfo")){
+      console.log("logeado");
       this.isLoged = true;
       this.nameUser = JSON.parse(localStorage.getItem("userInfo")).displayName;
     }else{
+      console.log("no logeado");
       this.isLoged = false;
     }
   }

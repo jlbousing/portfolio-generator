@@ -19,6 +19,11 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LoginModule} from './pages/login/login-module.module';
 import { HomeModule} from './pages/home/home.module';
 
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+
+
 const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: "**", component: NotFoundComponent}
@@ -42,7 +47,16 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    HomeModule
+    HomeModule,
+    NgxsModule.forRoot([],
+      { developmentMode: !environment.production }
+    ),
+    NgxsReduxDevtoolsPluginModule.forRoot({
+      disabled: environment.production
+    }),
+    NgxsLoggerPluginModule.forRoot({
+      disabled: environment.production
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
