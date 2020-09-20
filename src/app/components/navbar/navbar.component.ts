@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { Store, Select} from '@ngxs/store';
+import {Observable} from 'rxjs';
+import {UserStateModel} from '../../store/user/user.state';
 
 @Component({
   selector: 'navbar',
@@ -8,6 +11,7 @@ import { Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+  @Select(state => state.user) userState: Observable<UserStateModel>;
   isLoged: boolean;
   nameUser: string;
 

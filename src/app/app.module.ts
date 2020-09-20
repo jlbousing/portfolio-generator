@@ -22,7 +22,7 @@ import { HomeModule} from './pages/home/home.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-
+import { UserState} from './store/user/user.state';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -48,7 +48,7 @@ const routes: Routes = [
     MatButtonModule,
     MatMenuModule,
     HomeModule,
-    NgxsModule.forRoot([],
+    NgxsModule.forRoot([UserState],
       { developmentMode: !environment.production }
     ),
     NgxsReduxDevtoolsPluginModule.forRoot({

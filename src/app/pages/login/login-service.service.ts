@@ -4,6 +4,9 @@ import { auth } from 'firebase/app';
 import {Observable} from 'rxjs';
 import { Router} from '@angular/router';
 import { User} from '../../shared/models/user';
+import { UserStateModel} from '../../store/user/user.state';
+import { Store, Select} from '@ngxs/store';
+import { AddUser, GetUser } from '../../store/user/user.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +14,11 @@ import { User} from '../../shared/models/user';
 export class LoginServiceService  {
 
   private userData: Observable<firebase.User>;
+  @Select(state => state.user) userState: Observable<UserStateModel>;
 
   constructor(private angularFireAuth: AngularFireAuth,
-              private router: Router) {
+              private router: Router,
+              private store: Store) {
     this.userData = angularFireAuth.authState;
   }
 
@@ -24,7 +29,19 @@ export class LoginServiceService  {
       .then((response) => {
           console.log("te has logeado ",response.user.uid);
           if(response.user){
-            localStorage.setItem("userInfo",JSON.stringify(this.saveUserInfo(response.user)));
+            let user = new User();
+            user.uid = response.user.uid;
+            user.photoUrl = response.user.photoURL;
+            user.emailVerified = response.user.emailVerified;
+            user.displayName = response.user.displayName;
+            user.email = response.user.email;
+            localStorage.setItem("userInfo",JSON.stringify(user));
+
+            this.store.dispatch(new AddUser(user));
+            this.userState.subscribe((data) => {
+              console.log("mostrando user desde el state ",data.user.payload);
+            });
+
           }
           this.router.navigate(["/"]);
       }).catch((err) => {

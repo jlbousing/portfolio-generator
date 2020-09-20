@@ -1,43 +1,47 @@
-import { State, Action, StateContext, Selector} from '@ngxs/store';
+import { State, Store, StateContext, Action, Selector} from '@ngxs/store';
+import { AddUser, Reset, GetUser} from './user.actions';
 import { User} from '../../shared/models/user';
-import { AddUser, RemoveUser} from './user.actions';
+import {patch} from '@ngxs/store/operators';
+import {Injectable} from '@angular/core';
+
+export interface UserStateModel{
+  users: User
+}
 
 @State({
   name: "user",
   defaults: {
-    uid: "";
-    email: "";
-    emailVerified: false;
-    photoUrl: "";
-    displayName: "";
+    user: null
   }
 })
+
+@Injectable()
 export class UserState{
-  @Selector()
-  static getUser(state: User) {
-    return state;
+  // Inyectamos la store global en nuestro estado.
+  constructor(private store: Store) {
   }
 
-  //SE AÑADE NUEVO USER AL ESTADO
+
+  @Action(GetUser)
+  GetUser(stateContext: StateContext<any>){
+      console.log(stateContext.getState().user);
+  }
+
   @Action(AddUser)
-  add({ getState, patchState }: StateContext<User>, { payload }: AddUser){
-    const state = getState();
-    patchState({
-      user: [...state, payload]
+  AddUser(stateContext: StateContext<any>, payload: User){
+
+    stateContext.patchState({
+      user: payload
     });
+
   }
 
-  @Action(RemoveUser)
-  remove({ getState, patchState }: StateContext<User>, { payload }: RemoveUser) {
-    patchState({
-      user: {
-        uid: null,
-        email: null,
-        emailVerified: null,
-        photoUrl: null,
-        displayName: null
-      }
+
+  @Action(Reset)
+  Reset(stateContext: StateContext<any>){
+
+    stateContext.patchState({
+      user: null
     });
   }
-}
 }
