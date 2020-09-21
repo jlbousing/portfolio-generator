@@ -25,8 +25,13 @@
     <span>WorkExp</span>
     <span class="example-spacer"></span>
 
-    <button mat-button [matMenuTriggerFor]="aboveMenu" *ngIf="isLoged">
-      {{ nameUser !== null ? nameUser : 'WorkExp user'}}
+    <button mat-button [matMenuTriggerFor]="aboveMenu" *ngIf="isLogged()">
+      <span *ngIf="user !== undefined && isThereUser(); else notuser">
+        {{ user.displayName}}
+      </span>
+      <ng-template #notuser>
+        <span>WorkExp user</span>
+      </ng-template>
     </button>
     <mat-menu #aboveMenu="matMenu" yPosition="above">
       <button mat-menu-item>Show your WorkExp</button>

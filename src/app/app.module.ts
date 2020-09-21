@@ -19,6 +19,15 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LoginModule} from './pages/login/login-module.module';
 import { HomeModule} from './pages/home/home.module';
 
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { UserState} from './store/user/user.state';
+
+import { AngularFireModule} from '@angular/fire';
+import { AngularFirestoreModule} from '@angular/fire/firestore';
+import { environment} from '../../../environments/environment';
+
 const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: "**", component: NotFoundComponent}
@@ -42,7 +51,18 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    HomeModule
+    HomeModule,
+    NgxsModule.forRoot([UserState],
+      { developmentMode: !environment.production }
+    ),
+    NgxsReduxDevtoolsPluginModule.forRoot({
+      disabled: environment.production
+    }),
+    NgxsLoggerPluginModule.forRoot({
+      disabled: environment.production
+    }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
