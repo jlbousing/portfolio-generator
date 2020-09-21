@@ -3,6 +3,8 @@ import { Router} from '@angular/router';
 import { Store, Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {UserStateModel} from '../../store/user/user.state';
+import { User} from '../../shared/models/user';
+import {LoginServiceService} from '../../pages/login/login-service.service';
 
 @Component({
   selector: 'navbar',
@@ -12,34 +14,51 @@ import {UserStateModel} from '../../store/user/user.state';
 export class NavbarComponent implements OnInit {
 
   @Select(state => state.user) userState: Observable<UserStateModel>;
-  isLoged: boolean;
-  nameUser: string;
+  user: User;
 
-  constructor(private router: Router) {
-    this.isLogged();
+  constructor(private router: Router,
+              private loginService: LoginServiceService) {
+
+    this.initializateUser();
   }
 
 
   ngOnInit(): void {
+      this.userState.subscribe((data: any) => {
+        if(data != null && data.user != null){
+          if(data.user.payload instanceof User){
+            this.user = data.user.payload;
+          }
+        }
+      });
+  }
 
+  isThereUser(){
+    if(this.user !== undefined && this.user !== null && this.user.displayName !== null){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   isLogged(){
 
-    if(localStorage.getItem("userInfo")){
-      console.log("logeado");
-      this.isLoged = true;
-      this.nameUser = JSON.parse(localStorage.getItem("userInfo")).displayName;
-    }else{
-      console.log("no logeado");
-      this.isLoged = false;
+    if(JSON.parse(localStorage.getItem("userInfo")) === null){
+      return false;
+    }else {
+      return true;
     }
   }
 
+  initializateUser(){
+    this.user = new User();
+    this.user.email = null;
+    this.user.displayName = null;
+    this.user.emailVerified = null;
+  }
+
   logOut(){
-    localStorage.setItem("userInfo",null);
-    this.isLoged = false;
-    this.router.navigate(["/login"]);
+    this.loginService.logOut();
   }
 
 }

@@ -7,6 +7,7 @@ import { User} from '../../shared/models/user';
 import { UserStateModel} from '../../store/user/user.state';
 import { Store, Select} from '@ngxs/store';
 import { AddUser, GetUser } from '../../store/user/user.actions';
+import { AngularFirestore} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class LoginServiceService  {
 
   constructor(private angularFireAuth: AngularFireAuth,
               private router: Router,
-              private store: Store) {
+              private store: Store,
+              private firestore: AngularFirestore) {
     this.userData = angularFireAuth.authState;
   }
 
@@ -27,6 +29,11 @@ export class LoginServiceService  {
     this.angularFireAuth
       .signInWithEmailAndPassword(email,password)
       .then((response) => {
+
+          this.firestore.collection("users")
+              .get().subscribe((querySnapshot) => {
+                console.log("probando conexion con firebase",querySnapshot);
+          });
           console.log("te has logeado ",response.user.uid);
           if(response.user){
             let user = new User();
@@ -39,7 +46,9 @@ export class LoginServiceService  {
 
             this.store.dispatch(new AddUser(user));
             this.userState.subscribe((data) => {
-              console.log("mostrando user desde el state ",data.user.payload);
+              if(data != undefined && data != null){
+                console.log("mostrando user desde el state ",data.user.payload);
+              }
             });
 
           }
@@ -84,6 +93,16 @@ export class LoginServiceService  {
     user.photoUrl = data.photoURL;
 
     return user;
+  }
+
+  logOut(){
+    //SE BORRA LA INFORMACIÓN DEL USUARIO
+    this.store.dispatch(new AddUser(null))
+    localStorage.setItem("userInfo",null);
+    this.userState.subscribe((data) => {
+      console.log("deslogeando usuario en el state ",data);
+      this.router.navigate(["/login"]);
+    });
   }
 
 

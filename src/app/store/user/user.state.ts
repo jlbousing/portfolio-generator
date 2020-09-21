@@ -5,7 +5,7 @@ import {patch} from '@ngxs/store/operators';
 import {Injectable} from '@angular/core';
 
 export interface UserStateModel{
-  users: User
+  user: User
 }
 
 @State({
