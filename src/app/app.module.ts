@@ -16,8 +16,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
+//MODULES
 import { LoginModule} from './pages/login/login-module.module';
 import { HomeModule} from './pages/home/home.module';
+import { DashboardModule} from './pages/dashboard/dashboard.module';
 
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -26,6 +28,7 @@ import { UserState} from './store/user/user.state';
 
 import { AngularFireModule} from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
+
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -61,7 +64,8 @@ const routes: Routes = [
       disabled: environment.production
     }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
