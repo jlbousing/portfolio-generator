@@ -22,39 +22,33 @@ export class NavbarComponent implements OnInit {
     this.initializateUser();
   }
 
-
   ngOnInit(): void {
-      this.userState.subscribe((data: any) => {
-        if(data != null && data.user != null){
-          if(data.user.payload instanceof User){
-            this.user = data.user.payload;
-          }
-        }
-      });
-  }
-
-  isThereUser(){
-    if(this.user !== undefined && this.user !== null && this.user.displayName !== null){
-      return true;
-    }else{
-      return false;
-    }
+      console.log("on init");
   }
 
   isLogged(){
-
-    if(JSON.parse(localStorage.getItem("userInfo")) === null){
-      return false;
-    }else {
+    this.initializateUser();
+    if(JSON.parse(localStorage.getItem("userInfo")) !== null){
       return true;
+    }else {
+      return false;
     }
   }
 
   initializateUser(){
     this.user = new User();
-    this.user.email = null;
-    this.user.displayName = null;
-    this.user.emailVerified = null;
+    let user = JSON.parse(localStorage.getItem("userInfo"));
+    this.user.email = user.email;
+    this.user.displayName = user.displayName;
+    this.user.emailVerified = user.emailVerified;
+  }
+
+  isThereDisplayName(){
+
+    if(this.user !== null && this.user.displayName !== null){
+      return true;
+    }
+    return false;
   }
 
   logOut(){

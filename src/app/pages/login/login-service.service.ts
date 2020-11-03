@@ -47,7 +47,7 @@ export class LoginServiceService  {
             this.store.dispatch(new AddUser(user));
             this.userState.subscribe((data) => {
               if(data != undefined && data != null){
-                console.log("mostrando user desde el state ",data.user.payload);
+                //console.log("mostrando user desde el state ",data.user.payload);
               }
             });
 
