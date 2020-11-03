@@ -26,7 +26,7 @@
     <span class="example-spacer"></span>
 
     <button mat-button [matMenuTriggerFor]="aboveMenu" *ngIf="isLogged()">
-      <span *ngIf="user !== undefined && isThereUser(); else notuser">
+      <span *ngIf="user !== undefined && isThereDisplayName(); else notuser">
         {{ user.displayName}}
       </span>
       <ng-template #notuser>
