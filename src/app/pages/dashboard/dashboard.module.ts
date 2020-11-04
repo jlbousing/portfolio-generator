@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import {DashboardComponent} from './dashboard.component';
 import { RouterModule, Routes} from '@angular/router';
 
+import { MatButtonModule} from '@angular/material/button';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent}
@@ -14,6 +17,8 @@ const routes: Routes = [
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes)
   ]
 })
